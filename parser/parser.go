@@ -37,9 +37,9 @@ func Parse(ids []string, notionToken string) map[string]float64 {
 		responseBodyArray, _ := ioutil.ReadAll(response.Body)
 		_ = json.Unmarshal(responseBodyArray, &page)
 		properties := page["properties"].(map[string]interface{})
-		amd := properties["AMD"].(map[string]interface{})["number"].(float64)
+		agg := properties["Aggregation"].(map[string]interface{})["formula"].(map[string]interface{})["number"].(float64)
 		category := properties["Category"].(map[string]interface{})["select"].(map[string]interface{})["name"].(string)
-		results[category] = results[category] + amd
+		results[category] = results[category] + agg
 	}
 	return results
 }
